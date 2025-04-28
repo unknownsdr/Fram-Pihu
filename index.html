@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Image Carousel</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: url('bimg.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .carousel-wrapper {
+      perspective: 1200px;
+      width: 800px;
+      height: 400px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carousel-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .carousel-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-style: preserve-3d;
+      transition: all 1s ease;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .carousel-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .message {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      color: lawngreen; /* Text color updated to white */
+      text-align: center;
+      background-color: transparent;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 2.5px solid deepskyblue; /* Border color updated to sky red */
+      display: none;
+    }
+
+    .center {
+      transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+      z-index: 3;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .center .message {
+      display: block;
+    }
+
+    .left {
+      transform: translate(-200%, -50%) rotateY(25deg) scale(0.9);
+      z-index: 2;
+      opacity: 0.6;
+    }
+
+    .right {
+      transform: translate(100%, -50%) rotateY(-25deg) scale(0.9);
+      z-index: 2;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-container" id="carousel"></div>
+  </div>
+
+  <script>
+    const images = [
+      { src: 'img1.jpg', message: 'Wishing You the Happiest Birthday Ever! 🌟' },
+      { src: 'img2.jpg', message: 'The Most Cheerful Girl in the Class! 😎' },
+      { src: 'img3.jpg', message: 'The Most Creative Soul in the Entire World! 🌎' },
+      { src: 'img4.jpg', message: 'Sometimes You Get a Little Angry... 🤨' },
+      { src: 'img5.jpg', message: 'But You’re Always the Cutest! 🥰' },
+      { src: 'img6.jpg', message: 'You Are Truly Loved and Cherished. 😶‍🌫️' },
+      { src: 'img7.jpg', message: 'Your Eyes Hurt Everyone! ✨' },
+      { src: 'img8.jpg', message: 'And You’re Still the Smartest Too! 😎' },
+      { src: 'img9.jpg', message: 'May Your Days Ahead Be Filled with Smiles! ☺️' },
+      { src: 'img10.jpg', message: 'Once Again, Happy Birthday, Princess! 👸🏻' }
+    ];
+
+    const carousel = document.getElementById('carousel');
+    let current = 0;
+    const items = [];
+
+    // Create all items once
+    images.forEach(image => {
+      const item = document.createElement('div');
+      item.classList.add('carousel-item');
+
+      const img = document.createElement('img');
+      img.src = image.src;
+      item.appendChild(img);
+
+      const msg = document.createElement('div');
+      msg.classList.add('message');
+      msg.textContent = image.message;
+      item.appendChild(msg);
+
+      carousel.appendChild(item);
+      items.push(item);
+    });
+
+    function updateClasses() {
+      const total = items.length;
+      const leftIndex = (current - 1 + total) % total;
+      const centerIndex = current;
+      const rightIndex = (current + 1) % total;
+
+      items.forEach((item, index) => {
+        item.classList.remove('left', 'center', 'right');
+
+        if (index === leftIndex) {
+          item.classList.add('left');
+        } else if (index === centerIndex) {
+          item.classList.add('center');
+        } else if (index === rightIndex) {
+          item.classList.add('right');
+        }
+      });
+    }
+
+    updateClasses();
+
+    setInterval(() => {
+      current = (current + 1) % images.length;
+      updateClasses();
+    }, 3000);
+  </script>
+
+</body>
+  </html>
