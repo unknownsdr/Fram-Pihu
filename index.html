@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>F Pihu Birthday</title>
+  <title>Happy Birthday Pihu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
@@ -13,15 +14,24 @@
       font-family: Arial, sans-serif;
       background: url('bimg.jpg') no-repeat center center fixed;
       background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    }
+
+    .top-title {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 40px;
+      color: #ffeb3b;
+      font-family: 'Pacifico', cursive;
+      text-shadow: 0 0 5px #fff, 0 0 10px #f50057, 0 0 20px #f50057;
+      z-index: 10;
+      animation: glow 2s ease-in-out infinite alternate;
     }
 
     .carousel-wrapper {
       perspective: 1400px;
       width: 100%;
-      max-width: 1800px;
       height: 100%;
       display: flex;
       justify-content: center;
@@ -49,8 +59,8 @@
     }
 
     .carousel-item img {
-      height: 50vh; /* Make image height half of screen height */
-      width: auto;  /* Maintain aspect ratio */
+      height: 50vh;
+      width: auto;
       max-width: 90vw;
       object-fit: contain;
       border-radius: 20px;
@@ -60,15 +70,25 @@
     .message {
       margin-top: 20px;
       font-size: 28px;
-      font-weight: bold;
-      color: lawngreen;
+      font-family: 'Pacifico', cursive;
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 14px 24px;
-      border-radius: 12px;
-      border: 3px solid deepskyblue;
-      display: none;
+      color: #ffeb3b;
+      text-shadow: 0 0 5px #fff, 0 0 10px #f50057, 0 0 15px #f50057;
+      animation: glow 2s ease-in-out infinite alternate;
       max-width: 90%;
+      padding: 14px 24px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      border: 2px solid #00e5ff;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #f50057, 0 0 15px #f50057;
+      }
+      to {
+        text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 25px #ff4081;
+      }
     }
 
     .center {
@@ -98,15 +118,18 @@
       .carousel-item img {
         height: 40vh;
       }
-
       .message {
-        font-size: 18px;
-        padding: 10px 16px;
+        font-size: 20px;
+      }
+      .top-title {
+        font-size: 28px;
       }
     }
   </style>
 </head>
 <body>
+
+  <div class="top-title">Happy Birthday Pihu!</div>
 
   <div class="carousel-wrapper">
     <div class="carousel-container" id="carousel"></div>
